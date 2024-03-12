@@ -38,9 +38,9 @@ tr:nth-child(even) {
     </div>
     <ul class="nav navbar-nav">
       <li class="active"><a href="#">Home</a></li>
-      <li><a href="{{route('deposit-page')}}"  >Deposit</a></li>
-      <li><a href="#">Withdrawals</a></li>
-      <li><a href="#">Transfer</a></li>
+      <li><a href="{{route('deposit-page',['id'=>$user->id])}}"  >Deposit</a></li>
+      <li><a href="{{route('withdraw-page',['id'=>$user->id])}}">Withdrawals</a></li>
+      <li><a href="{{route('transfer-page',['id'=>$user->id])}}">Transfer</a></li>
       <li><a href="#">Statement</a></li>
       <li><a href="#">Logout</a></li>
     </ul>
@@ -63,6 +63,8 @@ tr:nth-child(even) {
     <td>{{$name}}</td>
     <td>{{$email}}</td>
     <td>---</td>
+
+    {{$user->id}}
   </tr>
 
 

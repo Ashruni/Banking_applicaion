@@ -33,19 +33,20 @@
 <body>
     <!-- <h4>Success</h4> -->
 <div class="container">
-  <h2>Deposit Money</h2>
-  <form action="{{route('depositing-money',['id' => request('id')]) }}" method="post">
+  <h2>Withdraw Money</h2>
+  <form action="{{route('withdrawing-money',['id' => request('id')]) }}" method="post">
+
     @csrf
 
 
     <div class="form-group">
       <label >Amount</label>
-      <input type="number" min="200" max="15000" name="deposit" class="form-control"  placeholder="Enter deposit money" >
+      <input type="number" min="200" max="15000" name="withdraw" class="form-control"  placeholder="Enter withdrawal money" >
     </div>
     <div class="checkbox">
       <label><input type="checkbox" name="remember"> Remember me</label>
     </div>
-    <button type="submit" class="btn btn-default">Deposit</button>
+    <button type="submit" class="btn btn-default">Withdraw</button>
   </form>
 </div>
 

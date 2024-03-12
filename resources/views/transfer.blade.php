@@ -33,19 +33,22 @@
 <body>
     <!-- <h4>Success</h4> -->
 <div class="container">
-  <h2>Deposit Money</h2>
-  <form action="{{route('depositing-money',['id' => request('id')]) }}" method="post">
+  <h2>Transfer Money</h2>
+  <form action="{{route('transfer-money',['id' => request('id')]) }}" method="post">
+
     @csrf
-
-
+    <div class="form-group">
+      <label >Email:</label>
+      <input type="email" name="email" class="form-control" id="email" placeholder="Enter email" name="email">
+    </div>
     <div class="form-group">
       <label >Amount</label>
-      <input type="number" min="200" max="15000" name="deposit" class="form-control"  placeholder="Enter deposit money" >
+      <input type="number" min="200" max="15000" name="transfer" class="form-control"  placeholder="Enter transfer money" >
     </div>
     <div class="checkbox">
       <label><input type="checkbox" name="remember"> Remember me</label>
     </div>
-    <button type="submit" class="btn btn-default">Deposit</button>
+    <button type="submit" class="btn btn-default">Transfer</button>
   </form>
 </div>
 

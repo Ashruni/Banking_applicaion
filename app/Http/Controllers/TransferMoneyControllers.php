@@ -1,11 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\User;
 use App\Models\UserAmountDetails;
+use DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class DepositedPageControllers extends Controller
+class TransferMoneyControllers extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -26,19 +28,27 @@ class DepositedPageControllers extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request,$id)
+    public function store(Request $request,$id=9)
     {
         $request->validate([
-            'deposit'=>'required',
+            'email'=>'required',
+            'transfer'=>'required',
         ]);
+        $email=DB::table('users')->where('email',$request->email)->exists();
+        if($email){
+            UserAmountDetails::create(
+                [
+                'email'=>$request->email,
+                'transfer'=>$request->transfer,
+                'uid'=>$id
+            ]
+        );
+            return "success";
 
-
-        UserAmountDetails::create([
-            'deposit'=>$request['deposit'],
-            'uid'=>$id
-        ]);
-        return view('success');
-
+        }
+        else{
+            return "something went wrong";
+        }
 
     }
 

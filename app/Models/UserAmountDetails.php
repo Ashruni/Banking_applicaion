@@ -9,7 +9,7 @@ class UserAmountDetails extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'id',
+        'uid',
         'deposit',
         'withdraw',
         'email',

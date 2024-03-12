@@ -24,11 +24,10 @@ class LoginContentAuthControllers extends Controller
 
         if($details){
             if(Auth::attempt($request->only('email', 'password'))){
-                // $user =auth()->user();
-
+                $user =auth()->user();
                 $name=$details->name;
                 $email=$details->email;
-                return view('user-dashboard')->with('name',$name)->with('email',$email);
+                return view('user-dashboard')->with('name',$name)->with('email',$email)->with('user',$user);
             }
             else{
                 return 'Something went wrong';

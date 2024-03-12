@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('user_amount_details', function (Blueprint $table) {
 
-            $table->id();
+            $table->uid();
             $table->morphs('tokenable');
             $table->string('email')->nullable();
             $table->integer('deposit')->nullable();
             $table->integer('withdraw')->nullable();
             $table->integer('transfer')->nullable();
-            $table->string('field')->nullable();
+            $table->integer('field')->nullable();
             $table->timestamp('last_used_at')->nullable();
             $table->timestamp('expires_at')->nullable();
             $table->timestamps();

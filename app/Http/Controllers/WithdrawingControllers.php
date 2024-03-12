@@ -5,7 +5,7 @@ use App\Models\UserAmountDetails;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class DepositedPageControllers extends Controller
+class WithdrawingControllers extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -29,15 +29,15 @@ class DepositedPageControllers extends Controller
     public function store(Request $request,$id)
     {
         $request->validate([
-            'deposit'=>'required',
+            'withdraw'=>'required'
         ]);
-
-
-        UserAmountDetails::create([
-            'deposit'=>$request['deposit'],
-            'uid'=>$id
-        ]);
-        return view('success');
+        UserAmountDetails::create(
+            [
+                'withdraw'=>$request->withdraw,
+                'uid'=>$id
+            ]
+            );
+            return view('success');
 
 
     }
