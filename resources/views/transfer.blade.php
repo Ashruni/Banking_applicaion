@@ -34,8 +34,8 @@
     <!-- <h4>Success</h4> -->
 <div class="container">
   <h2>Transfer Money</h2>
-  <form action="{{route('transfer-money',['id' => request('id')]) }}" method="post">
-
+  <form action="{{route('transferring-money',['id' => request('id')]) }}" method="post">
+  {{request()->input('id')}}
     @csrf
     <div class="form-group">
       <label >Email:</label>
