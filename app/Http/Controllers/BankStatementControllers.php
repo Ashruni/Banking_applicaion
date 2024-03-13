@@ -1,18 +1,25 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use DB;
+use App\Models\UserAmountDetails;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class TransferPageViewControllers extends Controller
+class BankStatementControllers extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index($currentBalance)
+    public function index($id,$currentBalance)
     {
-        return view('transfer');
+        $userDetails= DB::table('users')->where('id',$id)->first();
+        $email= $userDetails->email;
+        // DD($email);
+        $bankDetails= DB::table('user_amount_details')->where('uid', $id)->get();
+        $bankDepositDetails= DB::table('user_amount_details')->where('email',$email)->get();
+        // DD($bankDepositDetails);
+        return view('bank-statement')->with('bankDetails', $bankDetails)->with('bankDepositDetails',$bankDepositDetails)->with('currentBalance',$currentBalance);
     }
 
     /**

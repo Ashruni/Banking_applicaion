@@ -34,7 +34,7 @@
     <!-- <h4>Success</h4> -->
 <div class="container">
   <h2>Withdraw Money</h2>
-  <form action="{{route('withdrawing-money',['id' => request('id')]) }}" method="post">
+  <form action="{{route('withdrawing-money',['id' => request('id'),'currentBalance'=>request()->route('currentBalance')]) }}" method="post">
 
     @csrf
 

@@ -28,26 +28,46 @@ class TransferMoneyControllers extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request,$id=9)
+    public function store(Request $request,$id,$currentBalance)
     {
         $request->validate([
             'email'=>'required',
-            'transfer'=>'required',
+            'transfer'=>'required|numeric',
         ]);
+
         $email=DB::table('users')->where('email',$request->email)->exists();
+
+
         if($email){
-            UserAmountDetails::create(
-                [
-                'email'=>$request->email,
-                'transfer'=>$request->transfer,
-                'uid'=>$id
-            ]
-        );
-            return "success";
+
+            $transferAmount=(int)$request->transfer;
+            // $currentBalanceInteger = $currentBalance;
+            $amount = $currentBalance-$transferAmount;
+            // DD($amount);
+            // $amount=100;
+            if($amount>0){
+                UserAmountDetails::create(
+                    [
+                    'email'=>$request->email,
+                    'transfer'=>$request->transfer,
+                    'uid'=>$id
+                     ]);
+                return "success";
+
+            }
+            else{
+                return "insufficient balance";
+            }
+
+
+
 
         }
+        // elseif($amount<0){
+        //     return "insufficient balance";
+        // }
         else{
-            return "something went wrong";
+            return "Insufficient balance";
         }
 
     }

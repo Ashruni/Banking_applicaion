@@ -26,18 +26,28 @@ class WithdrawingControllers extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request,$id)
+    public function store(Request $request,$id,$currentBalance)
     {
         $request->validate([
             'withdraw'=>'required'
         ]);
-        UserAmountDetails::create(
-            [
-                'withdraw'=>$request->withdraw,
-                'uid'=>$id
-            ]
-            );
-            return view('success');
+        $withdrawAmount= (int)$request->withdraw;
+        $withdrawalAmount = $currentBalance -$withdrawAmount;
+        // DD( $withdrawalAmount );
+        if($withdrawalAmount>=0){
+            UserAmountDetails::create(
+                [
+                    'withdraw'=>$request->withdraw,
+                    'uid'=>$id
+                ]
+                );
+                return view('success');
+
+        }
+        else{
+            return 'Insufficient Balance';
+        }
+
 
 
     }
