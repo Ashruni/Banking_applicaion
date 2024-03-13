@@ -36,14 +36,22 @@ class RegistrationContentProcessingControllers extends Controller
             'password'=>'required'
         ]);
         $hashedPassword = Hash::make($request->password);
-        $users = User::create(
+        $userExist=DB::table('users')->where('email',$request->email)->exists();
+        if(!$userExist){
+            $users = User::create(
                 [
                 'name'=>$request['name'],
                 'email'=>$request['email'],
                 'password'=>$hashedPassword
                 ]
             );
-        return view('login-page');
+            return view('login-page');
+
+        }
+        else{
+            return "Duplicate mail id is not possible";
+        }
+
 
 
 
