@@ -36,14 +36,13 @@ class RegistrationContentProcessingControllers extends Controller
             'password'=>'required'
         ]);
         $hashedPassword = Hash::make($request->password);
-
-            $users = User::create(
+        $users = User::create(
                 [
                 'name'=>$request['name'],
                 'email'=>$request['email'],
                 'password'=>$hashedPassword
-            ]
-        );
+                ]
+            );
         return view('login-page');
 
 

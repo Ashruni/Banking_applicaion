@@ -36,46 +36,43 @@ class TransferMoneyControllers extends Controller
         ]);
         $userDetails=DB::table('users')->where('id',$id)->first();
         $userEmail=$userDetails->email;
-        // DD($userEmail);
 
         $email=DB::table('users')->where('email',$request->email)->exists();
         $emailValue=DB::table('users')->where('email',$request->email)->first();
-        // DD($emailValue->email);
-        // DD($emailValue->email != $userEmail );
-        // DD($email && $emailValue->email != $userEmail );
-        if($email && $emailValue->email != $userEmail ){
-
+        if($email && $emailValue->email != $userEmail )
+        {
             $transferAmount=(int)$request->transfer;
-            // $currentBalanceInteger = $currentBalance;
             $amount = $currentBalance-$transferAmount;
             // DD($amount);
-            // $amount=100;
-            if($amount>0){
-                UserAmountDetails::create(
-                    [
+            if($amount>0)
+            {
+
+                UserAmountDetails::create([
                     'email'=>$request->email,
                     'transfer'=>$request->transfer,
                     'uid'=>$id
                      ]);
-                return "success";
-
+                     return "success";
             }
-            else{
+            else
+            {
                 return "insufficient balance";
             }
 
-
-
-
         }
-        // elseif($amount<0){
-        //     return "insufficient balance";
-        // }
-        else{
+        else
+        {
             return "User Do not exist";
         }
 
     }
+    // DD($userEmail);
+
+            // $amount=100;
+     // DD($emailValue->email);
+     // $currentBalanceInteger = $currentBalance;
+        // DD($emailValue->email != $userEmail );
+        // DD($email && $emailValue->email != $userEmail );
 
     /**
      * Display the specified resource.

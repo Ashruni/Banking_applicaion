@@ -20,22 +20,24 @@ class LoginContentAuthControllers extends Controller
             'password'=>'required',
         ]);
         $email= $request->email;
+        $emailExist = User::where('email',$email)->exists();
         $details = User::where('email',$email)->first();
 
-        if($details){
+        if($emailExist){
             if(Auth::attempt($request->only('email', 'password'))){
                 $user =auth()->user();
                 $id=$details->id;
                 $name=$details->name;
                 $email=$details->email;
+
                 $deposit = DB::table('user_amount_details')->where('uid',$id)->sum('deposit');
                 $withdrawal= DB::table('user_amount_details')->where('uid',$id)->sum('withdraw');
                 $transferDeposit = DB::table('user_amount_details')->where('email',$request->email)->sum('transfer');
                 $transferWithdraw = DB::table('user_amount_details')->where('uid',$id)->whereNotNull('email')->sum('transfer');
+
                 $sumDeposits= $deposit + $transferDeposit ;
                 $sumWithdraw= $withdrawal + $transferWithdraw;
                 $currentBalance= $sumDeposits -$sumWithdraw;
-                
                 return view('user-dashboard')->with('name',$name)->with('email',$email)->with('user',$user)->with('currentBalance',$currentBalance );
 
             }
@@ -43,6 +45,9 @@ class LoginContentAuthControllers extends Controller
                 return 'Something went wrong';
             }
 
+        }
+        else{
+            return 'User does not exist';
         }
 
     }

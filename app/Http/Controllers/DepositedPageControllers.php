@@ -28,9 +28,11 @@ class DepositedPageControllers extends Controller
      */
     public function store(Request $request,$id)
     {
-        $request->validate([
+        $request->validate(
+            [
             'deposit'=>'required',
-        ]);
+            ]
+        );
 
 
         UserAmountDetails::create([

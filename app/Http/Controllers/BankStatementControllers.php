@@ -15,12 +15,15 @@ class BankStatementControllers extends Controller
     {
         $userDetails= DB::table('users')->where('id',$id)->first();
         $email= $userDetails->email;
-        // DD($email);
+
         $bankDetails= DB::table('user_amount_details')->where('uid', $id)->get();
         $bankDepositDetails= DB::table('user_amount_details')->where('email',$email)->get();
-        // DD($bankDepositDetails);
+
         return view('bank-statement')->with('bankDetails', $bankDetails)->with('bankDepositDetails',$bankDepositDetails)->with('currentBalance',$currentBalance);
     }
+    
+    // DD($email);
+    // DD($bankDepositDetails);
 
     /**
      * Show the form for creating a new resource.
