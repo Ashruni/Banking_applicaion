@@ -33,16 +33,16 @@
     @csrf
   <div class="form-group">
       <label for="">Name:</label>
-      <input type="text" name="name" class="form-control" id="email" placeholder="Enter email" name="email">
+      <input type="text" name="name" class="form-control" id="email" placeholder="Enter email"  required>
     </div>
 
     <div class="form-group">
       <label for="email">Email:</label>
-      <input type="email" name="email" class="form-control" id="email" placeholder="Enter email" name="email">
+      <input type="email" name="email" class="form-control" id="email" placeholder="Enter email"  required>
     </div>
     <div class="form-group">
       <label for="pwd">Password:</label>
-      <input type="password" name="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
+      <input type="password" name="password" class="form-control" id="pwd" placeholder="Enter password" required>
     </div>
     <div class="checkbox">
       <label><input type="checkbox" name="remember"> Remember me</label>

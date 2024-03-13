@@ -39,11 +39,11 @@
     @csrf
     <div class="form-group">
       <label >Email:</label>
-      <input type="email" name="email" class="form-control" id="email" placeholder="Enter email" name="email">
+      <input type="email" name="email" class="form-control" id="email" placeholder="Enter email" name="email" required>
     </div>
     <div class="form-group">
       <label >Amount</label>
-      <input type="number" min="200" max="15000" name="transfer" class="form-control"  placeholder="Enter transfer money" >
+      <input type="number" min="200" max="15000" name="transfer" class="form-control"  placeholder="Enter transfer money"required >
     </div>
     <div class="checkbox">
       <label><input type="checkbox" name="remember"> Remember me</label>

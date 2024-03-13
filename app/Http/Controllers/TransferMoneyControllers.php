@@ -34,11 +34,16 @@ class TransferMoneyControllers extends Controller
             'email'=>'required',
             'transfer'=>'required|numeric',
         ]);
+        $userDetails=DB::table('users')->where('id',$id)->first();
+        $userEmail=$userDetails->email;
+        // DD($userEmail);
 
         $email=DB::table('users')->where('email',$request->email)->exists();
-
-
-        if($email){
+        $emailValue=DB::table('users')->where('email',$request->email)->first();
+        // DD($emailValue->email);
+        // DD($emailValue->email != $userEmail );
+        // DD($email && $emailValue->email != $userEmail );
+        if($email && $emailValue->email != $userEmail ){
 
             $transferAmount=(int)$request->transfer;
             // $currentBalanceInteger = $currentBalance;
@@ -67,7 +72,7 @@ class TransferMoneyControllers extends Controller
         //     return "insufficient balance";
         // }
         else{
-            return "Insufficient balance";
+            return "User Do not exist";
         }
 
     }

@@ -25,7 +25,7 @@ tr:nth-child(even) {
   background-color: #dddddd;
 }
     body{
-        background-color:#ebfaeb;
+        background-color:#e6ffff;
     }
 </style>
 <body>
@@ -43,7 +43,7 @@ tr:nth-child(even) {
       <!-- <td>{{$currentBalance}}</td> -->
       <li><a href="{{route('transfer-page',['id'=>$user->id,'currentBalance'=>$currentBalance])}}">Transfer</a></li>
       <li><a href="{{route('bank-statement',['id'=>$user->id,'currentBalance'=>$currentBalance])}}">Statement</a></li>
-      <li><a href="#">Logout</a></li>
+      <li><a href="{{route('logout')}}">Logout</a></li>
     </ul>
 
   </div>
@@ -66,7 +66,7 @@ tr:nth-child(even) {
     <td>{{$currentBalance}}</td>
 
 
-    {{$user->id}}
+    <!-- {{$user->id}} -->
 
 
   </tr>

@@ -44,8 +44,7 @@
         <!-- <td><td> -->
 
         @endforeach
-        <th>BALANCE</th>
-        <td>₹{{$currentBalance}}</td>
+
       </tr>
 
     </tbody>
@@ -63,7 +62,10 @@
         <td>{{$bankDepositDetail->transfer}}</td>
         <td>{{$bankDepositDetail->email}}</td>
         @endforeach
+        <th>BALANCE</th>
+        <td>₹{{$currentBalance}}</td>
     </tr>
+
   </tbody>
 
 

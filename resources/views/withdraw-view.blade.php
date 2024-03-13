@@ -41,7 +41,7 @@
 
     <div class="form-group">
       <label >Amount</label>
-      <input type="number" min="200" max="15000" name="withdraw" class="form-control"  placeholder="Enter withdrawal money" >
+      <input type="number" min="200" max="15000" name="withdraw" class="form-control"  placeholder="Enter withdrawal money" required>
     </div>
     <div class="checkbox">
       <label><input type="checkbox" name="remember"> Remember me</label>

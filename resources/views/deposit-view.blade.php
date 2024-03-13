@@ -40,7 +40,7 @@
 
     <div class="form-group">
       <label >Amount</label>
-      <input type="number" min="200" max="15000" name="deposit" class="form-control"  placeholder="Enter deposit money" >
+      <input type="number" min="200" max="15000" name="deposit" class="form-control"  placeholder="Enter deposit money" required>
     </div>
     <div class="checkbox">
       <label><input type="checkbox" name="remember"> Remember me</label>
