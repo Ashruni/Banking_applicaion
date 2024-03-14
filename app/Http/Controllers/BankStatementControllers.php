@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 use DB;
-use App\Models\UserAmountDetails;
+use App\Models\UserAmountDetail;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -21,7 +21,7 @@ class BankStatementControllers extends Controller
 
         return view('bank-statement')->with('bankDetails', $bankDetails)->with('bankDepositDetails',$bankDepositDetails)->with('currentBalance',$currentBalance);
     }
-    
+
     // DD($email);
     // DD($bankDepositDetails);
 

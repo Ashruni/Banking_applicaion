@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\UserAmountDetails;
+use App\Models\UserAmountDetail;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -35,7 +35,7 @@ class WithdrawingControllers extends Controller
         $withdrawalAmount = $currentBalance -$withdrawAmount;
         // DD( $withdrawalAmount );
         if($withdrawalAmount>=0){
-            UserAmountDetails::create(
+            UserAmountDetail::create(
                 [
                     'withdraw'=>$request->withdraw,
                     'uid'=>$id

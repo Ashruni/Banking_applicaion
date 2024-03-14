@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\UserAmountDetails;
+use App\Models\UserAmountDetail;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -35,7 +35,7 @@ class DepositedPageControllers extends Controller
         );
 
 
-        UserAmountDetails::create([
+        UserAmountDetail::create([
             'deposit'=>$request['deposit'],
             'uid'=>$id
         ]);

@@ -13,8 +13,10 @@ class UserAmountDetail extends Model
         'deposit',
         'withdraw',
         'email',
-        'transfer',
-        'field'
+        'transfer'
+
 
     ];
+
+
 }

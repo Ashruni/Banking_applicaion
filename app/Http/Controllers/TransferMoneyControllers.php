@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\User;
-use App\Models\UserAmountDetails;
+use App\Models\UserAmountDetail;
 use DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -47,7 +47,7 @@ class TransferMoneyControllers extends Controller
             if($amount>0)
             {
 
-                UserAmountDetails::create([
+                UserAmountDetail::create([
                     'email'=>$request->email,
                     'transfer'=>$request->transfer,
                     'uid'=>$id
