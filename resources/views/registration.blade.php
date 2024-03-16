@@ -3,6 +3,8 @@
 <head>
   <title>Bootstrap Example</title>
   <meta charset="utf-8">
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -18,11 +20,17 @@
     }
     .container{
         background-color:white;
-        height:360px;
-        width:400px;
+        height:380px;
+        width:420px;
         margin-top:100px;
         border-radius:10px;
     }
+    #eyeIcon{
+        /* margin-bottom:-500px; */
+        margin-left:370px;
+    }
+
+
 
  </style>
 
@@ -40,10 +48,16 @@
       <label for="email">Email:</label>
       <input type="email" name="email" class="form-control" id="email" placeholder="Enter email"  required>
     </div>
+
     <div class="form-group">
-      <label for="pwd">Password:</label>
-      <input type="password" name="password" class="form-control" id="pwd" placeholder="Enter password" required>
-    </div>
+<label>Password: (minimum 8 characters ) </label>
+
+    <input type="password" id="password" name= "password" class="form-control" pattern=".{8,}" placeholder="Enter password" required>
+    <label for="password" id="eyeIcon" onclick="document.getElementById('password').type = (document.getElementById('password').type === 'password') ? 'text' : 'password'; this.innerHTML = (document.getElementById('password').type === 'password') ? '<i class=&quot;fas fa-eye&quot;></i>' : '<i class=&quot;fas fa-eye-slash&quot;></i>';">
+        <i class="fas fa-eye"></i>
+
+    </label>
+</div>
     <div class="checkbox">
       <label><input type="checkbox" name="remember"> Remember me</label>
     </div>

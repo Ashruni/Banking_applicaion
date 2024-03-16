@@ -24,9 +24,10 @@ Route::match(['GET','POST'],'login-page',[App\Http\Controllers\LoginControllers:
 Route::get('success',[App\Http\Controllers\SuccessControllers::class,'index'])->name('success');
 Route::match(['GET','POST'],'login-posting',[App\Http\Controllers\LoginContentAuthControllers::class,'index'])->name('login-content-posting');
 Route::match(['GET','POST'],'user-dashboard',[App\Http\Controllers\UserDashboardControllers::class,'index'])->name('user-dashboard');
-Route::get('deposit-page/{id}',[App\Http\Controllers\DepositViewPageControllers::class,'index'])->name('deposit-page');
-Route::match(['GET','POST'],'deposited/{id}',[App\Http\Controllers\DepositedPageControllers::class,'store'])->name('depositing-money');
-Route::get('withdraw-page/{id}/{currentBalance}',[App\Http\Controllers\WithdrawPageControllers::class,'index'])->name('withdraw-page');
+
+Route::get('deposit-page/{id}',[App\Http\Controllers\DepositedPageControllers::class,'index'])->name('deposit-page');
+Route::post('deposited/{id}',[App\Http\Controllers\DepositedPageControllers::class,'store'])->name('depositing-money');
+Route::get('withdraw-page/{id}/{currentBalance}',[App\Http\Controllers\WithdrawingControllers::class,'index'])->name('withdraw-page');
 Route::post('withdrawing-money/{id}/{currentBalance}',[App\Http\Controllers\WithdrawingControllers::class,'store'])->name('withdrawing-money');
 Route::match(['GET','POST'],'transfer-page/{id}/{currentBalance}',[App\Http\Controllers\TransferPageViewControllers::class,'index'])->name('transfer-page');
 Route::match(['GET','POST'],'transfer-money/{id}/{currentBalance}',[App\Http\Controllers\TransferMoneyControllers::class,'store'])->name('transferring-money');

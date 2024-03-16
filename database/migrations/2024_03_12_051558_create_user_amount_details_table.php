@@ -23,14 +23,7 @@ return new class extends Migration
             $table->timestamp('last_used_at')->nullable();
             $table->timestamp('expires_at')->nullable();
             $table->timestamps();
-            // $table->id();
-            // $table->timestamps();
-            // $table->deposit();
-            // $table->withdraw();
-            // $table->email();
-            // $table->transfer();
-            // $table->field();
-
+           
 
         });
     }

@@ -31,6 +31,7 @@
  </style>
 
 <body>
+@include('navbar', ['name' => $name, 'id' => $user->id, 'currentBalance' => $currentBalance])
     <!-- <h4>Success</h4> -->
 <div class="container">
   <h2>Transfer Money</h2>

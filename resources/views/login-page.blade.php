@@ -30,7 +30,7 @@
 
  </style>
 
-<body>
+<body style="background-color:#e6ffee;">
     <!-- <h4>Success</h4> -->
 <div class="container">
   <h2>Login To Your Account</h2>
@@ -42,9 +42,14 @@
       <input type="email" name="email" class="form-control" id="email" placeholder="Enter email" name="email" required>
     </div>
     <div class="form-group">
-      <label >Password:</label>
-      <input type="password" name="password" class="form-control" id="pwd" placeholder="Enter password" required>
-    </div>
+<label>Password: (minimum 8 characters ) </label>
+
+    <input type="password" id="password" name= "password" class="form-control" pattern=".{8,}" placeholder="Enter password" required>
+    <label for="password" id="eyeIcon" onclick="document.getElementById('password').type = (document.getElementById('password').type === 'password') ? 'text' : 'password'; this.innerHTML = (document.getElementById('password').type === 'password') ? '<i class=&quot;fas fa-eye&quot;></i>' : '<i class=&quot;fas fa-eye-slash&quot;></i>';">
+        <i class="fas fa-eye"></i>
+
+    </label>
+</div>
     <div class="checkbox">
       <label><input type="checkbox" name="remember"> Remember me</label>
     </div>

@@ -14,6 +14,7 @@
     }
     </style>
 <body>
+<!-- @include('navbar', ['name' => $name, 'id' => $user->id, 'currentBalance' => $currentBalance]) -->
 <div class="container">
     @csrf
   <h2>Bank Statement</h2>
@@ -59,8 +60,8 @@
   <tbody>
   @foreach( $bankDepositDetails as  $bankDepositDetail)
     <tr>
-        <td>{{$bankDepositDetail->transfer}}</td>
-        <td>{{$bankDepositDetail->email}}</td>
+        <td> ₹ {{$bankDepositDetail->transfer}}</td>
+        <td>{{$bankDepositDetail->email}}</td><br>
         @endforeach
         <th>BALANCE</th>
         <td>₹{{$currentBalance}}</td>

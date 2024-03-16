@@ -30,9 +30,25 @@
 
  </style>
 
-<body>
+<body style="background-color:#e6ffff;">
+@include('navbar',['name' => $name,'userId' => $user->id,'user' => $user->id, 'currentBalance' => $currentBalance])
+@if(session('success'))
+    <div class="alert alert-success" style="margin-top:-20px;">
+        {{ session('success') }}
+    </div>
+@endif
+@if(session('error'))
+    <div class="alert alert-danger" style="margin-top:-20px;">
+        {{ session('error') }}
+    </div>
+@endif
+@if(session('warning'))
+    <div class="alert alert-warning" style="margin-top:-20px;">
+        {{ session('warning') }}
+    </div>
+@endif
     <!-- <h4>Success</h4> -->
-<div class="container">
+<div class="container" style="width:400px;height:200px;">
   <h2>Withdraw Money</h2>
   <form action="{{route('withdrawing-money',['id' => request('id'),'currentBalance'=>request()->route('currentBalance')]) }}" method="post">
 
@@ -41,12 +57,10 @@
 
     <div class="form-group">
       <label >Amount</label>
-      <input type="number" min="200" max="15000" name="withdraw" class="form-control"  placeholder="Enter withdrawal money" required>
+      <input type="number"  max="10000000" name="withdraw" class="form-control"  placeholder="Enter withdrawal money" required>
     </div>
-    <div class="checkbox">
-      <label><input type="checkbox" name="remember"> Remember me</label>
-    </div>
-    <button type="submit" class="btn btn-default">Withdraw</button>
+
+    <button type="submit" class="btn btn-default" style=" background-color:#1a75ff;">Withdraw</button>
   </form>
 </div>
 

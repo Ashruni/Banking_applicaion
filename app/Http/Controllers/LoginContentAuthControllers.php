@@ -26,6 +26,7 @@ class LoginContentAuthControllers extends Controller
         if($emailExist){
             if(Auth::attempt($request->only('email', 'password'))){
                 $user =auth()->user();
+                // $sessionData = session()->all();
                 $id=$details->id;
                 $name=$details->name;
                 $email=$details->email;
@@ -38,7 +39,7 @@ class LoginContentAuthControllers extends Controller
                 $sumDeposits= $deposit + $transferDeposit ;
                 $sumWithdraw= $withdrawal + $transferWithdraw;
                 $currentBalance= $sumDeposits -$sumWithdraw;
-                return view('user-dashboard')->with('name',$name)->with('email',$email)->with('user',$user)->with('currentBalance',$currentBalance );
+                return view('user-dashboard',compact('name','id','email','user','currentBalance'));
 
             }
             else{
