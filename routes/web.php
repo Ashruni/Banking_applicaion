@@ -29,7 +29,8 @@ Route::get('deposit-page/{id}',[App\Http\Controllers\DepositedPageControllers::c
 Route::post('deposited/{id}',[App\Http\Controllers\DepositedPageControllers::class,'store'])->name('depositing-money');
 Route::get('withdraw-page/{id}/{currentBalance}',[App\Http\Controllers\WithdrawingControllers::class,'index'])->name('withdraw-page');
 Route::post('withdrawing-money/{id}/{currentBalance}',[App\Http\Controllers\WithdrawingControllers::class,'store'])->name('withdrawing-money');
-Route::match(['GET','POST'],'transfer-page/{id}/{currentBalance}',[App\Http\Controllers\TransferPageViewControllers::class,'index'])->name('transfer-page');
-Route::match(['GET','POST'],'transfer-money/{id}/{currentBalance}',[App\Http\Controllers\TransferMoneyControllers::class,'store'])->name('transferring-money');
+Route::get('transfer-page/{id}/{currentBalance}',[App\Http\Controllers\TransferMoneyControllers::class,'index'])->name('transfer-page');
+Route::post('transfer-money/{id}/{currentBalance}',[App\Http\Controllers\TransferMoneyControllers::class,'store'])->name('transferring-money');
 Route::get('bank/statement/{id}/{currentBalance}',[App\Http\Controllers\BankStatementControllers::class,'index'])->name('bank-statement');
 Route::get('logout/',[App\Http\Controllers\LogoutBankAppControllers::class,'index'])->name('logout');
+Route::get('home/{id}',[App\Http\Controllers\HomeBankAppController::class,'index'])->name('home');

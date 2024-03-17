@@ -12,9 +12,30 @@ class TransferMoneyControllers extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($id,$currentBalance)
     {
-        //
+        $user = DB::table('users')->where('id', $id)->first();
+       $email=$user->email;
+       $details = User::where('email',$email)->first();
+
+       $id=$details->id;
+       $name=$details->name;
+       $email=$details->email;
+       $deposit = DB::table('user_amount_details')->where('uid',$id)->sum('deposit');
+
+       $withdrawal= DB::table('user_amount_details')->where('uid',$id)->sum('withdraw');
+       $transferDeposit = DB::table('user_amount_details')->where('email',$email)->sum('transfer');
+       $transferWithdraw = DB::table('user_amount_details')->where('uid',$id)->whereNotNull('email')->sum('transfer');
+       $sumDeposits= $deposit + $transferDeposit ;
+       $sumWithdraw= $withdrawal + $transferWithdraw;
+       $currentBalance= $sumDeposits -$sumWithdraw;
+
+       $name=$user->name;
+       $user =auth()->user();
+
+
+       return view('transfer',compact('name','id','user','currentBalance'));
+
     }
 
     /**
@@ -36,6 +57,7 @@ class TransferMoneyControllers extends Controller
         ]);
         $userDetails=DB::table('users')->where('id',$id)->first();
         $userEmail=$userDetails->email;
+        $transferMoney = $request->transfer;
 
         $email=DB::table('users')->where('email',$request->email)->exists();
         $emailValue=DB::table('users')->where('email',$request->email)->first();
@@ -44,7 +66,7 @@ class TransferMoneyControllers extends Controller
             $transferAmount=(int)$request->transfer;
             $amount = $currentBalance-$transferAmount;
             // DD($amount);
-            if($amount>0)
+            if($amount>=0 && $transferMoney>0)
             {
 
                 UserAmountDetail::create([
@@ -52,17 +74,17 @@ class TransferMoneyControllers extends Controller
                     'transfer'=>$request->transfer,
                     'uid'=>$id
                      ]);
-                     return "success";
+                     return redirect()->route('transfer-page', ['id' => $id,'currentBalance'=>$currentBalance])->with('success', 'Transferred Money successfully!');
             }
             else
             {
-                return "insufficient balance";
+                return redirect()->route('transfer-page',['id' => $id,'currentBalance'=>$currentBalance])->with('warning','Something Went Wrong!');
             }
 
         }
         else
         {
-            return "User Do not exist";
+            return redirect()->route('transfer-page',['id' => $id,'currentBalance'=>$currentBalance])->with('error','enter a valid user');
         }
 
     }

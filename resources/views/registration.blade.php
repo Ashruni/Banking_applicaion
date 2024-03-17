@@ -41,7 +41,7 @@
     @csrf
   <div class="form-group">
       <label for="">Name:</label>
-      <input type="text" name="name" class="form-control" id="email" placeholder="Enter email"  required>
+      <input type="text" name="name" class="form-control"  placeholder="Enter name"  required>
     </div>
 
     <div class="form-group">

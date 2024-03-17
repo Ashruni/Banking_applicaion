@@ -16,7 +16,7 @@
       <a class="navbar-brand" href="#">Welcome {{$name}} </a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
+      <li class="active"><a href="{{route('home',['id'=>$id])}}">Home</a></li>
       <li><a href="{{route('deposit-page',['id'=>$id])}}"  >Deposit</a></li>
       <li><a href="{{route('withdraw-page',['id'=>$id,'currentBalance'=>$currentBalance])}}">Withdrawals</a></li>
       <li><a href="{{route('transfer-page',['id'=>$id,'currentBalance'=>$currentBalance])}}">Transfer</a></li>

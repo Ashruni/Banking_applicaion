@@ -30,10 +30,25 @@
 
  </style>
 
-<body>
+<body style="background-color:#e6ffff;">
 @include('navbar', ['name' => $name, 'id' => $user->id, 'currentBalance' => $currentBalance])
     <!-- <h4>Success</h4> -->
-<div class="container">
+@if(session('success'))
+    <div class="alert alert-success" style="margin-top:-20px;">
+        {{ session('success') }}
+    </div>
+@endif
+@if(session('error'))
+    <div class="alert alert-danger" style="margin-top:-20px;">
+        {{ session('error') }}
+    </div>
+@endif
+@if(session('warning'))
+    <div class="alert alert-danger" style="margin-top:-20px;">
+        {{ session('warning') }}
+    </div>
+@endif
+<div class="container" style="height:300px;width:400px;">
   <h2>Transfer Money</h2>
   <form action="{{route('transferring-money',['id' => request('id'),'currentBalance' => request()->route('currentBalance')]) }}" method="post">
   {{request()->input('id')}}
@@ -44,12 +59,10 @@
     </div>
     <div class="form-group">
       <label >Amount</label>
-      <input type="number" min="200" max="15000" name="transfer" class="form-control"  placeholder="Enter transfer money"required >
+      <input type="number"  max="1000000" name="transfer" class="form-control"  placeholder="Enter transfer money"required >
     </div>
-    <div class="checkbox">
-      <label><input type="checkbox" name="remember"> Remember me</label>
-    </div>
-    <button type="submit" class="btn btn-default">Transfer</button>
+
+    <button type="submit" style="background-color:#1a75ff" class="btn btn-default">Transfer</button>
   </form>
 </div>
 
