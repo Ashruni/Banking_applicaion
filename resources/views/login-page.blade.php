@@ -1,14 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Bootstrap Example</title>
+  <title>Bank Application</title>
   <meta charset="utf-8">
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <style>
+      #eyeIcon{
+        /* margin-bottom:-500px; */
+        margin-left:370px;
+    }
     body{
         background-color:#e6ffee;
     }
@@ -19,7 +25,7 @@
     .container{
         background-color:white;
         height:360px;
-        width:400px;
+        width:410px;
         margin-top:100px;
         border-radius:10px;
     }
@@ -34,7 +40,7 @@
     <!-- <h4>Success</h4> -->
 <div class="container">
   <h2>Login To Your Account</h2>
-  <form action="{{route('login-content-posting')}}" method="post">
+  <form action="{{route('login_content_posting')}}" method="post">
     @csrf
 
     <div class="form-group">

@@ -50,7 +50,7 @@
     <!-- <h4>Success</h4> -->
 <div class="container" style="width:400px;height:200px;">
   <h2>Withdraw Money</h2>
-  <form action="{{route('withdrawing-money',['id' => request('id'),'currentBalance'=>request()->route('currentBalance')]) }}" method="post">
+  <form action="{{route('withdrawing_money',['id' => request('id'),'currentBalance'=>request()->route('currentBalance')]) }}" method="post">
 
     @csrf
 

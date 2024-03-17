@@ -1,22 +1,21 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\UserAmountDetail;
 use DB;
 use App\Models\User;
+use App\Models\UserAmountDetail;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class DepositedPageControllers extends Controller
+class WithdrawingController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index($id)
     {
-
-        $user = DB::table('users')->where('id', $id)->first();
-        $email=$user->email;
+       $user = DB::table('users')->where('id', $id)->first();
+       $email=$user->email;
        $details = User::where('email',$email)->first();
 
        $id=$details->id;
@@ -33,39 +32,48 @@ class DepositedPageControllers extends Controller
 
        $name=$user->name;
        $user =auth()->user();
-       //    DD($user);
 
-       return view('deposit-view',compact('name','id','user','currentBalance'));
+
+       return view('withdraw-view',compact('name','id','user','currentBalance'));
     }
+
+
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-
+        //
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request,$id)
+    public function store(Request $request,$id,$currentBalance)
     {
-        $request->validate(
-            [
-            'deposit'=>'required',
-            ]
-        );
-        $deposits = $request->deposit;
-        if($deposits>0){
-            UserAmountDetail::create([
-                'deposit'=>$request['deposit'],
-                'uid'=>$id
-            ]);
-            return redirect()->route('deposit-page', ['id' => $id])->with('success', 'Deposit successful!');
+        $request->validate([
+            'withdraw'=>'required'
+        ]);
+        $withdrawAmount= (int)$request->withdraw;
+        if($withdrawAmount>0){
+            // DD( $currentBalance );
+            $withdrawalAmount = $currentBalance -$withdrawAmount;
+            // DD( $withdrawalAmount );
+            if($withdrawalAmount>=0 && $currentBalance>0){
+                UserAmountDetail::create(
+                    [
+                    'withdraw'=>$request->withdraw,
+                    'uid'=>$id
+                    ]);
+                return redirect()->route('withdraw_page', ['id' => $id,'currentBalance'=>$currentBalance])->with('success', 'withdrawal successful!');
+            }
+            else{
+                return redirect()->route('withdraw_page', ['id' => $id,'currentBalance'=>$currentBalance])->with('error', 'withdrawal unsuccessful due to insufficient bank balance!');
+            }
         }
         else{
-            return redirect()->route('deposit-page', ['id' => $id])->with('error', 'Deposit unsuccessful! Minimum deposit amount is of ₹1');
+            return redirect()->route('withdraw_page', ['id' => $id,'currentBalance'=>$currentBalance])->with('warning', 'withdrawal unsuccessful! Minimum withdrawal amount is of ₹1');
         }
 
 

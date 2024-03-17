@@ -7,14 +7,14 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use DB;
 
-class RegistrationContentProcessingControllers extends Controller
+class RegistrationContentProcessingController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        return view('registration');
     }
 
     /**

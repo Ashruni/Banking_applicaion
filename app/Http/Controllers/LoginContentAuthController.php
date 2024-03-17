@@ -7,14 +7,29 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
-class LoginContentAuthControllers extends Controller
+class LoginContentAuthController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index()
     {
-        // Auth::attempt($request);
+        return view('login-page');
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
         $validated=$request->validate([
             'email'=>'required',
             'password'=>'required',
@@ -51,22 +66,6 @@ class LoginContentAuthControllers extends Controller
             return 'User does not exist';
         }
 
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
     }
 
     /**

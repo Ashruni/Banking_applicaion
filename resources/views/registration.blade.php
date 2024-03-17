@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Bootstrap Example</title>
+  <title>Bank Application</title>
   <meta charset="utf-8">
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
@@ -37,7 +37,7 @@
 <body>
 <div class="container">
   <h2>Create your account</h2>
-  <form action="{{route('registration-content')}}" method="post">
+  <form action="{{route('registration_content')}}" method="post">
     @csrf
   <div class="form-group">
       <label for="">Name:</label>

@@ -50,7 +50,7 @@
 @endif
 <div class="container" style="height:300px;width:400px;">
   <h2>Transfer Money</h2>
-  <form action="{{route('transferring-money',['id' => request('id'),'currentBalance' => request()->route('currentBalance')]) }}" method="post">
+  <form action="{{route('transferring_money',['id' => request('id'),'currentBalance' => request()->route('currentBalance')]) }}" method="post">
   {{request()->input('id')}}
     @csrf
     <div class="form-group">

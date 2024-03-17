@@ -54,7 +54,7 @@
 
 <div class="container" style="width:400px;height:200px;" >
   <h2 style="margin-left:80px;">Deposit Money</h2>
-  <form action="{{route('depositing-money',['id' => request('id')]) }}" method="post">
+  <form action="{{route('depositing_money',['id' => request('id')]) }}" method="post">
     @csrf
 
 

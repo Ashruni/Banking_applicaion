@@ -1,20 +1,20 @@
 <?php
 
 namespace App\Http\Controllers;
-use DB;
 use App\Models\User;
 use App\Models\UserAmountDetail;
+use DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class WithdrawingControllers extends Controller
+class TransferMoneyController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index($id)
+    public function index($id,$currentBalance)
     {
-       $user = DB::table('users')->where('id', $id)->first();
+        $user = DB::table('users')->where('id', $id)->first();
        $email=$user->email;
        $details = User::where('email',$email)->first();
 
@@ -26,6 +26,7 @@ class WithdrawingControllers extends Controller
        $withdrawal= DB::table('user_amount_details')->where('uid',$id)->sum('withdraw');
        $transferDeposit = DB::table('user_amount_details')->where('email',$email)->sum('transfer');
        $transferWithdraw = DB::table('user_amount_details')->where('uid',$id)->whereNotNull('email')->sum('transfer');
+
        $sumDeposits= $deposit + $transferDeposit ;
        $sumWithdraw= $withdrawal + $transferWithdraw;
        $currentBalance= $sumDeposits -$sumWithdraw;
@@ -33,11 +34,9 @@ class WithdrawingControllers extends Controller
        $name=$user->name;
        $user =auth()->user();
 
+       return view('transfer',compact('name','id','user','currentBalance'));
 
-       return view('withdraw-view',compact('name','id','user','currentBalance'));
     }
-
-
 
     /**
      * Show the form for creating a new resource.
@@ -53,35 +52,48 @@ class WithdrawingControllers extends Controller
     public function store(Request $request,$id,$currentBalance)
     {
         $request->validate([
-            'withdraw'=>'required'
+            'email'=>'required',
+            'transfer'=>'required|numeric',
         ]);
-        $withdrawAmount= (int)$request->withdraw;
-        if($withdrawAmount>0){
-            // DD( $currentBalance );
-            $withdrawalAmount = $currentBalance -$withdrawAmount;
-            // DD( $withdrawalAmount );
-            if($withdrawalAmount>=0 && $currentBalance>0){
-                UserAmountDetail::create(
-                    [
-                    'withdraw'=>$request->withdraw,
+        $userDetails=DB::table('users')->where('id',$id)->first();
+        $userEmail=$userDetails->email;
+        $transferMoney = $request->transfer;
+
+        $email=DB::table('users')->where('email',$request->email)->exists();
+        $emailValue=DB::table('users')->where('email',$request->email)->first();
+        if($email && $emailValue->email != $userEmail )
+        {
+            $transferAmount=(int)$request->transfer;
+            $amount = $currentBalance-$transferAmount;
+            // DD($transferMoney);
+            // DD($transferAmount);
+            if($amount>=0 && $transferAmount>0)
+            {
+
+                UserAmountDetail::create([
+                    'email'=>$request->email,
+                    'transfer'=>$request->transfer,
                     'uid'=>$id
-                    ]);
-                return redirect()->route('withdraw-page', ['id' => $id,'currentBalance'=>$currentBalance])->with('success', 'withdrawal successful!');
+                     ]);
+                     return redirect()->route('transfer_page', ['id' => $id,'currentBalance'=>$currentBalance])->with('success', 'Transferred Money successfully!');
             }
-            else{
-                return redirect()->route('withdraw-page', ['id' => $id,'currentBalance'=>$currentBalance])->with('error', 'withdrawal unsuccessful due to insufficient bank balance!');
+            else
+            {
+                return redirect()->route('transfer_page',['id' => $id,'currentBalance'=>$currentBalance])->with('warning','Something Went Wrong!');
             }
+
         }
-        else{
-            return redirect()->route('withdraw-page', ['id' => $id,'currentBalance'=>$currentBalance])->with('warning', 'withdrawal unsuccessful! Minimum withdrawal amount is of ₹1');
+        else
+        {
+            return redirect()->route('transfer_page',['id' => $id,'currentBalance'=>$currentBalance])->with('error','enter a valid user');
         }
-
-
-
-
-
 
     }
+    // DD($userEmail);
+
+            // $amount=100;
+     // DD($emailValue->email);
+
 
     /**
      * Display the specified resource.

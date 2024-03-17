@@ -60,7 +60,7 @@
                         <th>Date</th>
                         <th>Deposits</th>
                         <th>Debit</th>
-                        <th>Amount Transferred to</th>
+                        <th>Amount - Transferred to Email</th>
                     </tr>
                 </thead>
                 <tbody>
