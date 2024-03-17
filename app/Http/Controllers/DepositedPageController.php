@@ -17,25 +17,25 @@ class DepositedPageController extends Controller
 
         $user = DB::table('users')->where('id', $id)->first();
         $email=$user->email;
-       $details = User::where('email',$email)->first();
 
-       $id=$details->id;
+       $details = User::where('email',$email)->first();
+       $ids=$details->id;
        $name=$details->name;
        $email=$details->email;
-       $deposit = DB::table('user_amount_details')->where('uid',$id)->sum('deposit');
 
-       $withdrawal= DB::table('user_amount_details')->where('uid',$id)->sum('withdraw');
+       $deposit = DB::table('user_amount_details')->where('uid',$ids)->sum('deposit');
+       $withdrawal= DB::table('user_amount_details')->where('uid',$ids)->sum('withdraw');
        $transferDeposit = DB::table('user_amount_details')->where('email',$email)->sum('transfer');
-       $transferWithdraw = DB::table('user_amount_details')->where('uid',$id)->whereNotNull('email')->sum('transfer');
+       $transferWithdraw = DB::table('user_amount_details')->where('uid',$ids)->whereNotNull('email')->sum('transfer');
        $sumDeposits= $deposit + $transferDeposit ;
        $sumWithdraw= $withdrawal + $transferWithdraw;
        $currentBalance= $sumDeposits -$sumWithdraw;
 
        $name=$user->name;
        $user =auth()->user();
-       //    DD($user);
+        //   DD($ids);
 
-       return view('deposit-view',compact('name','id','user','currentBalance'));
+       return view('deposit-view',compact('name','ids','user','currentBalance'));
     }
 
     /**

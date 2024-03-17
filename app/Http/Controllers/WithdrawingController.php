@@ -56,33 +56,26 @@ class WithdrawingController extends Controller
             'withdraw'=>'required'
         ]);
         $withdrawAmount= (int)$request->withdraw;
-        if($withdrawAmount>0){
-            // DD( $currentBalance );
-            $withdrawalAmount = $currentBalance -$withdrawAmount;
-            // DD( $withdrawalAmount );
-            if($withdrawalAmount>=0 && $currentBalance>0){
-                UserAmountDetail::create(
-                    [
-                    'withdraw'=>$request->withdraw,
-                    'uid'=>$id
-                    ]);
-                return redirect()->route('withdraw_page', ['id' => $id,'currentBalance'=>$currentBalance])->with('success', 'withdrawal successful!');
+        $withdrawalAmount = $currentBalance - $withdrawAmount;
+        if($withdrawalAmount>=0 && $withdrawAmount>0){
+            UserAmountDetail::create(
+                [
+                'withdraw'=>$request->withdraw,
+                'uid'=>$id
+                ]);
+                $currentBalance = $currentBalance - $withdrawAmount;
+                return redirect()->route('withdraw_page', ['id' => $id,'currentBalance'=>$currentBalance])->with('success', 'withdrawal successful!');// DD( $withdrawAmount );
             }
-            else{
-                return redirect()->route('withdraw_page', ['id' => $id,'currentBalance'=>$currentBalance])->with('error', 'withdrawal unsuccessful due to insufficient bank balance!');
+            elseif($withdrawAmount<=0)
+            {
+                return redirect()->route('withdraw_page', ['id' => $id,'currentBalance'=>$currentBalance])->with('warning', 'withdrawal unsuccessful! Minimum withdrawal amount is of ₹1');
+
             }
-        }
+
         else{
-            return redirect()->route('withdraw_page', ['id' => $id,'currentBalance'=>$currentBalance])->with('warning', 'withdrawal unsuccessful! Minimum withdrawal amount is of ₹1');
+            return redirect()->route('withdraw_page', ['id' => $id,'currentBalance'=>$currentBalance])->with('error', 'withdrawal unsuccessful due to insufficient bank balance!');
         }
-
-
-
-
-
-
     }
-
     /**
      * Display the specified resource.
      */

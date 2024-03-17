@@ -70,16 +70,18 @@ class TransferMoneyController extends Controller
             if($amount>=0 && $transferAmount>0)
             {
 
+
                 UserAmountDetail::create([
                     'email'=>$request->email,
                     'transfer'=>$request->transfer,
                     'uid'=>$id
                      ]);
+                     $currentBalance = $currentBalance - $transferAmount;
                      return redirect()->route('transfer_page', ['id' => $id,'currentBalance'=>$currentBalance])->with('success', 'Transferred Money successfully!');
             }
             else
             {
-                return redirect()->route('transfer_page',['id' => $id,'currentBalance'=>$currentBalance])->with('warning','Something Went Wrong!');
+                return redirect()->route('transfer_page',['id' => $id,'currentBalance'=>$currentBalance])->with('warning','Something Went Wrong! Check Account Balance or enter Correct Amount');
             }
 
         }

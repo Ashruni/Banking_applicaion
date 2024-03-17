@@ -38,8 +38,15 @@
 
 <body style="background-color:#e6ffee;">
     <!-- <h4>Success</h4> -->
+    @if(session('error'))
+    <div class="alert alert-danger" style="margin-top:-20x;">
+        {{ session('error') }}
+    </div>
+@endif
 <div class="container">
+
   <h2>Login To Your Account</h2>
+
   <form action="{{route('login_content_posting')}}" method="post">
     @csrf
 

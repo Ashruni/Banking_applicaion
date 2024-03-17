@@ -40,7 +40,7 @@
 
 
 <body style="background-color:#e6ffff;">
-@include('navbar',['name' => $name,'userId' => $user->id,'user' => $user->id, 'currentBalance' => $currentBalance])
+@include('navbar',['name' => $name,'id' => $ids, 'currentBalance' => $currentBalance])
 @if(session('success'))
     <div class="alert alert-success" style="margin-top:-20px;">
         {{ session('success') }}

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\LoginMiddleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +24,7 @@ Route::post('login',[App\Http\Controllers\RegistrationContentProcessingControlle
 Route::get('success',[App\Http\Controllers\SuccessControllers::class,'index'])->name('success');
 
 Route::get('login-page',[App\Http\Controllers\LoginContentAuthController::class,'index']);
-Route::post('login-posting',[App\Http\Controllers\LoginContentAuthController::class,'store'])->name('login_content_posting');
+Route::post('login-posting',[App\Http\Controllers\LoginContentAuthController::class,'store'])->name('login_content_posting')->middleware('login');
 
 Route::get('user-dashboard',[App\Http\Controllers\UserDashboardController::class,'index'])->name('user_dashboard');
 
