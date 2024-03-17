@@ -19,6 +19,7 @@ class BankStatementControllers extends Controller
 
         $bankDetails= DB::table('user_amount_details')->where('uid', $id)->get();
         $bankDepositDetails= DB::table('user_amount_details')->where('email',$email)->get();
+
         $user = DB::table('users')->where('id', $id)->first();
         $email=$user->email;
         $details = User::where('email',$email)->first();
